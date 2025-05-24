@@ -31,17 +31,50 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-app.MapGet("/todoitems", async (SketchOrganizerDb db) =>
+app.MapGet("/Sketch organizer", async (SketchOrganizerDb db) =>
     await db.Sketches.ToListAsync());
 
 
-    app.MapPost("/todoitems", async (Sketch sketch, SketchOrganizerDb db) =>
+    app.MapPost("Sketch organizer", async (Sketch sketch, SketchOrganizerDb db) =>
 {
     db.Sketches.Add(sketch);
     await db.SaveChangesAsync();
 
-    return Results.Created($"/todoitems/{sketch.id}", sketch);
+    return Results.Created($"/Sketch organizer/{sketch.id}", sketch);
 });
+
+
+// put function 
+
+app.MapPut("/put/update/{id}", async (int id, Sketch inputsketch, SketchOrganizerDb db) =>
+{
+    var sketch = await db.Sketches.FindAsync(id);
+
+    if (sketch is null) return Results.NotFound();
+
+    sketch.s_Title = inputsketch.s_Title;
+
+
+    await db.SaveChangesAsync();
+
+    return Results.NoContent();
+});
+
+
+// delete the data using the delete function.
+
+app.MapDelete("/Delete/{id}", async (int id, SketchOrganizerDb db) =>
+{
+    if (await db.Sketches.FindAsync(id) is Sketch sketch)
+    {
+        db.Sketches.Remove(sketch);
+        await db.SaveChangesAsync();
+        return Results.NoContent();
+    }
+
+    return Results.NotFound();
+});
+
 
 app.MapGet("/", () => "Mehreen  siddique \n22_arid_5114 \nBSCS");
 
