@@ -36,7 +36,7 @@ app.MapGet("/Sketch organizer", async (SketchOrganizerDb db) =>
 
   
   // insert the record in the sketch table.
-    app.MapPost("Sketch organizer", async (Sketch sketch, SketchOrganizerDb db) =>
+    app.MapPost("Add Record", async (Sketch sketch, SketchOrganizerDb db) =>
 {
     db.Sketches.Add(sketch);
     await db.SaveChangesAsync();
@@ -47,7 +47,7 @@ app.MapGet("/Sketch organizer", async (SketchOrganizerDb db) =>
 
 // put function  to update the record of table sketch.
 
-app.MapPut("/put/update/{id}", async (int id, Sketch inputsketch, SketchOrganizerDb db) =>
+app.MapPut("put/update Record", async (int id, Sketch inputsketch, SketchOrganizerDb db) =>
 {
     var sketch = await db.Sketches.FindAsync(id);
 
@@ -64,7 +64,7 @@ app.MapPut("/put/update/{id}", async (int id, Sketch inputsketch, SketchOrganize
 
 // delete the data using the id of sketch.
 
-app.MapDelete("/Delete/{id}", async (int id, SketchOrganizerDb db) =>
+app.MapDelete("Delete Record", async (int id, SketchOrganizerDb db) =>
 {
     if (await db.Sketches.FindAsync(id) is Sketch sketch)
     {
