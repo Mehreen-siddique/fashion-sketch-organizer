@@ -30,11 +30,12 @@ if (app.Environment.IsDevelopment())
         config.DocExpansion = "list";
     });
 }
-
+// see the record of sketch table using get function.
 app.MapGet("/Sketch organizer", async (SketchOrganizerDb db) =>
     await db.Sketches.ToListAsync());
 
-
+  
+  // insert the record in the sketch table.
     app.MapPost("Sketch organizer", async (Sketch sketch, SketchOrganizerDb db) =>
 {
     db.Sketches.Add(sketch);
@@ -44,7 +45,7 @@ app.MapGet("/Sketch organizer", async (SketchOrganizerDb db) =>
 });
 
 
-// put function 
+// put function  to update the record of table sketch.
 
 app.MapPut("/put/update/{id}", async (int id, Sketch inputsketch, SketchOrganizerDb db) =>
 {
@@ -52,7 +53,7 @@ app.MapPut("/put/update/{id}", async (int id, Sketch inputsketch, SketchOrganize
 
     if (sketch is null) return Results.NotFound();
 
-    sketch.s_Title = inputsketch.s_Title;
+    sketch.sketchTitle = inputsketch.sketchTitle;
 
 
     await db.SaveChangesAsync();
@@ -61,7 +62,7 @@ app.MapPut("/put/update/{id}", async (int id, Sketch inputsketch, SketchOrganize
 });
 
 
-// delete the data using the delete function.
+// delete the data using the id of sketch.
 
 app.MapDelete("/Delete/{id}", async (int id, SketchOrganizerDb db) =>
 {
