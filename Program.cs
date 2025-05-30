@@ -42,13 +42,13 @@ app.MapGet("/Designer", async (SketchOrganizerDb db) =>
   // insert the record in the Designer table.
 app.MapPost("Add Data", async (Sketch sketch, SketchOrganizerDb db) =>
 {
-    if (!await db.Designers.AnyAsync(d => d.id == sketch.Designerid))
+    if (!await db.Designers.AnyAsync(d => d.Id == sketch.DesignerId))
     {
         return Results.BadRequest("Invalid Designerid");
     }
     db.Sketches.Add(sketch);
     await db.SaveChangesAsync();
-    return Results.Created($"/Sketch organizer/{sketch.id}", sketch);
+    return Results.Created($"/Sketch organizer/{sketch.Id}", sketch);
 });
 
 
@@ -102,7 +102,7 @@ app.MapDelete("Delete data", async (int id, SketchOrganizerDb db) =>
     db.Sketches.Add(sketch);
     await db.SaveChangesAsync();
 
-    return Results.Created($"/Sketch organizer/{sketch.id}", sketch);
+    return Results.Created($"/Sketch organizer/{sketch.Id}", sketch);
 });
 
 
@@ -135,9 +135,54 @@ app.MapDelete("Delete Sketch", async (int id, SketchOrganizerDb db) =>
     }
 
     return Results.NotFound();
-}); 
+});
 
 
+
+// get function of tags table.
+ app.MapGet("/Tag Table", async (SketchOrganizerDb db) =>
+    await db.Tags.ToListAsync());
+
+
+// Add data in the Tags table.
+
+app.MapPost("Add Tags", async (Tag tag, SketchOrganizerDb db) =>
+{
+db.Tags.Add(tag);
+await db.SaveChangesAsync();
+
+return Results.Created($"/Sketch organizer/{tag.id}", tag);
+});
+
+//update data in tags table.
+
+
+app.MapPut("put/update Tags", async (int id, Tag inputtag, SketchOrganizerDb db) =>
+{
+    var tag = await db.Tags.FindAsync(id);
+
+    if (tag is null) return Results.NotFound();
+
+    tag.TagName = inputtag.TagName;
+
+
+    await db.SaveChangesAsync();
+
+    return Results.NoContent();
+});
+
+// delete the data using the id of tags.
+app.MapDelete("Delete Tags", async (int id, SketchOrganizerDb db) =>
+{
+    if (await db.Tags.FindAsync(id) is Tag tag)
+    {
+        db.Tags.Remove(tag);
+        await db.SaveChangesAsync();
+        return Results.NoContent();
+    }
+
+    return Results.NotFound();
+});
 
 
 app.Run();
