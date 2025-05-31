@@ -40,17 +40,14 @@ app.MapGet("/Designer", async (SketchOrganizerDb db) =>
 
 
   // insert the record in the Designer table.
-app.MapPost("Add Data", async (Sketch sketch, SketchOrganizerDb db) =>
-{
-    if (!await db.Designers.AnyAsync(d => d.Id == sketch.DesignerId))
-    {
-        return Results.BadRequest("Invalid Designerid");
-    }
-    db.Sketches.Add(sketch);
-    await db.SaveChangesAsync();
-    return Results.Created($"/Sketch organizer/{sketch.Id}", sketch);
-});
 
+    app.MapPost("Add Designer", async (Designer designer, SketchOrganizerDb db) =>
+{
+    db.Designers.Add(designer);
+    await db.SaveChangesAsync();
+
+    return Results.Created($"/Sketch organizer/{designer.Id}", designer);
+});
 
 
 
