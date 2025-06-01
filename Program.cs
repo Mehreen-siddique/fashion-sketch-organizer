@@ -1,12 +1,13 @@
 using Microsoft.EntityFrameworkCore;
 
-
+// Create a WebApplication builder
 var builder = WebApplication.CreateBuilder(args);
 
+// Register the in-memory database for SketchOrganizerDb
 builder.Services.AddDbContext<SketchOrganizerDb>(opt => opt.UseInMemoryDatabase("Fashion Sketch Organizer"));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-// configure swagger
+// Configure Swagger/OpenAPI for API documentation
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddOpenApiDocument(config =>
 {
@@ -15,10 +16,10 @@ builder.Services.AddOpenApiDocument(config =>
     config.Version = "v1";
 });
 
-
-//swagger install
+// Build the application
 var app = builder.Build();
 
+// Enable Swagger UI in development environment
 if (app.Environment.IsDevelopment())
 {
     app.UseOpenApi();
@@ -31,44 +32,34 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-app.MapGet("/", () => "Mehreen  siddique \n22_arid_5114 \nBSCS");
+// Root endpoint with basic info
+app.MapGet("/", () => "Mehreen  siddique \n22_arid_5114 \nBSCS  \nFashion Sketch Organizer  \nImplementing CRUD operations.");
 
-// add the record of designer table.
+// ---------------- Designer Endpoints ----------------
 
+// Get all designers
 app.MapGet("/Designer", async (SketchOrganizerDb db) =>
     await db.Designers.ToListAsync());
 
-
-  // insert the record in the Designer table.
-
-    app.MapPost("Add Designer", async (Designer designer, SketchOrganizerDb db) =>
+// Add a new designer
+app.MapPost("Add Designer", async (Designer designer, SketchOrganizerDb db) =>
 {
     db.Designers.Add(designer);
     await db.SaveChangesAsync();
-
     return Results.Created($"/Sketch organizer/{designer.Id}", designer);
 });
 
-
-
-// put function  to update the record of table sketch.
-
+// Update an existing designer by id
 app.MapPut("put/update data", async (int id, Designer inputdesigner, SketchOrganizerDb db) =>
 {
     var designer = await db.Designers.FindAsync(id);
-
     if (designer is null) return Results.NotFound();
-
     designer.FullName = inputdesigner.FullName;
-
-
     await db.SaveChangesAsync();
-
     return Results.NoContent();
 });
 
-// delete the data using the id of designer.
-
+// Delete a designer by id
 app.MapDelete("Delete data", async (int id, SketchOrganizerDb db) =>
 {
     if (await db.Designers.FindAsync(id) is Designer designer)
@@ -77,51 +68,34 @@ app.MapDelete("Delete data", async (int id, SketchOrganizerDb db) =>
         await db.SaveChangesAsync();
         return Results.NoContent();
     }
-
     return Results.NotFound();
-}); 
+});
 
+// ---------------- Sketch Endpoints ----------------
 
-
-
-
-
-
-
-// see the record of sketch table using get function.
- app.MapGet("/Sketch organizer", async (SketchOrganizerDb db) =>
+// Get all sketches
+app.MapGet("/Sketch organizer", async (SketchOrganizerDb db) =>
     await db.Sketches.ToListAsync());
 
-
-  // insert the record in the sketch table.
-    app.MapPost("Add Sketch", async (Sketch sketch, SketchOrganizerDb db) =>
+// Add a new sketch
+app.MapPost("Add Sketch", async (Sketch sketch, SketchOrganizerDb db) =>
 {
     db.Sketches.Add(sketch);
     await db.SaveChangesAsync();
-
     return Results.Created($"/Sketch organizer/{sketch.Id}", sketch);
 });
 
-
-// put function  to update the record of table sketch.
-
+// Update an existing sketch by id
 app.MapPut("put/update Sketch", async (int id, Sketch inputsketch, SketchOrganizerDb db) =>
 {
     var sketch = await db.Sketches.FindAsync(id);
-
     if (sketch is null) return Results.NotFound();
-
     sketch.sketchTitle = inputsketch.sketchTitle;
-
-
     await db.SaveChangesAsync();
-
     return Results.NoContent();
 });
 
-
-// delete the data using the id of sketch.
-
+// Delete a sketch by id
 app.MapDelete("Delete Sketch", async (int id, SketchOrganizerDb db) =>
 {
     if (await db.Sketches.FindAsync(id) is Sketch sketch)
@@ -130,45 +104,34 @@ app.MapDelete("Delete Sketch", async (int id, SketchOrganizerDb db) =>
         await db.SaveChangesAsync();
         return Results.NoContent();
     }
-
     return Results.NotFound();
 });
 
+// ---------------- Tag Endpoints ----------------
 
-
-// get function of tags table.
- app.MapGet("/Tag Table", async (SketchOrganizerDb db) =>
+// Get all tags
+app.MapGet("/Tag Table", async (SketchOrganizerDb db) =>
     await db.Tags.ToListAsync());
 
-
-// Add data in the Tags table.
-
+// Add a new tag
 app.MapPost("Add Tags", async (Tag tag, SketchOrganizerDb db) =>
 {
-db.Tags.Add(tag);
-await db.SaveChangesAsync();
-
-return Results.Created($"/Sketch organizer/{tag.id}", tag);
+    db.Tags.Add(tag);
+    await db.SaveChangesAsync();
+    return Results.Created($"/Sketch organizer/{tag.id}", tag);
 });
 
-//update data in tags table.
-
-
+// Update an existing tag by id
 app.MapPut("put/update Tags", async (int id, Tag inputtag, SketchOrganizerDb db) =>
 {
     var tag = await db.Tags.FindAsync(id);
-
     if (tag is null) return Results.NotFound();
-
     tag.TagName = inputtag.TagName;
-
-
     await db.SaveChangesAsync();
-
     return Results.NoContent();
 });
 
-// delete the data using the id of tags.
+// Delete a tag by id
 app.MapDelete("Delete Tags", async (int id, SketchOrganizerDb db) =>
 {
     if (await db.Tags.FindAsync(id) is Tag tag)
@@ -177,9 +140,8 @@ app.MapDelete("Delete Tags", async (int id, SketchOrganizerDb db) =>
         await db.SaveChangesAsync();
         return Results.NoContent();
     }
-
     return Results.NotFound();
 });
 
-
+// Run the application
 app.Run();
