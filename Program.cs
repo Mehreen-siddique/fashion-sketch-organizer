@@ -1,5 +1,15 @@
 var builder = WebApplication.CreateBuilder(args);
 
+// Add CORS support
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddOpenApiDocument(config =>
@@ -12,18 +22,17 @@ builder.Services.AddOpenApiDocument(config =>
 
 var app = builder.Build();
 
+// Enable CORS
+app.UseCors();
+
+// Enable static file serving
+app.UseDefaultFiles();
+app.UseStaticFiles();
 
 if (app.Environment.IsDevelopment())
 {
     app.UseOpenApi();
-    app.UseSwaggerUi(config =>
-    {
-        // Configure Swagger UI appearance and paths
-        config.DocumentTitle = "SketchOrganizer API";
-        config.Path = "/swagger";
-        config.DocumentPath = "/swagger/{documentName}/swagger.json";
-        config.DocExpansion = "list";
-    });
+    app.UseSwaggerUi();
 }
 
 

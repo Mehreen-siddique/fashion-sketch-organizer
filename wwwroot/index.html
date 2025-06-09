@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fashion Sketch Organizer</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="/css/styles.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="#">Fashion Sketch Organizer</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-page="home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-page="dashboard">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-page="sketches">Sketches</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-page="designers">Designers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-page="tags">Tags</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mt-4">
+        <!-- Alert for messages -->
+        <div id="alert" class="alert d-none" role="alert"></div>
+
+    <!-- Content pages -->
+        <!-- Home Page -->
+        <div id="home-page" class="content-page">
+            <div class="hero-section text-center py-5 mb-4">
+                <h1 class="display-4 mb-3">Welcome to Fashion Sketch Organizer</h1>
+                <p class="lead mb-4">Your creative space for managing fashion designs and inspirations</p>
+                <div class="row justify-content-center">
+                    <div class="col-md-4">
+                        <button class="btn btn-lg btn-primary w-100" onclick="showPage('sketches')">
+                            <i class="fas fa-pencil-alt me-2"></i>Start Creating
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="feature-card card h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-paint-brush feature-icon mb-3"></i>
+                            <h3>Organize Sketches</h3>
+                            <p>Keep your fashion sketches organized and easily accessible in one place.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card card h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-users feature-icon mb-3"></i>
+                            <h3>Manage Designers</h3>
+                            <p>Track and collaborate with designers in your fashion projects.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card card h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-tags feature-icon mb-3"></i>
+                            <h3>Categorize with Tags</h3>
+                            <p>Use tags to categorize and quickly find your fashion designs.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard Page -->
+        <div id="dashboard-page" class="content-page d-none">
+            <h2 class="mb-4">Dashboard Overview</h2>
+            <div class="row g-4 mb-4">
+                <div class="col-md-4">
+                    <div class="card stat-card bg-primary text-white">
+                        <div class="card-body">
+                            <h5 class="card-title">Total Sketches</h5>
+                            <h2 class="card-text" id="totalSketches">0</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card stat-card bg-success text-white">
+                        <div class="card-body">
+                            <h5 class="card-title">Active Designers</h5>
+                            <h2 class="card-text" id="totalDesigners">0</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card stat-card bg-info text-white">
+                        <div class="card-body">
+                            <h5 class="card-title">Available Tags</h5>
+                            <h2 class="card-text" id="totalTags">0</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">Recent Sketches</h5>
+                        </div>
+                        <div class="card-body">
+                            <div id="recentSketches" class="row row-cols-1 row-cols-md-2 g-4">
+                                <!-- Recent sketches will be loaded here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">Top Designers</h5>
+                        </div>
+                        <div class="card-body">
+                            <ul id="topDesigners" class="list-group list-group-flush">
+                                <!-- Top designers will be loaded here -->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sketches Page -->
+        <div id="sketches-page" class="content-page d-none">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2>Sketches</h2>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#sketchModal">Add New Sketch</button>
+            </div>
+            <div id="sketches-list" class="row row-cols-1 row-cols-md-3 g-4"></div>
+        </div>
+
+        <div id="designers-page" class="content-page d-none">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2>Designers</h2>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#designerModal">Add New Designer</button>
+            </div>
+            <div id="designers-list" class="table-responsive"></div>
+        </div>
+
+        <div id="tags-page" class="content-page d-none">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2>Tags</h2>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#tagModal">Add New Tag</button>
+            </div>
+            <div id="tags-list" class="table-responsive"></div>
+        </div>
+    </div>
+
+    <!-- Sketch Modal -->
+    <div class="modal fade" id="sketchModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add/Edit Sketch</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="sketchForm">
+                        <input type="hidden" id="sketchId">
+                        <div class="mb-3">
+                            <label for="sketchTitle" class="form-label">Title</label>
+                            <input type="text" class="form-control" id="sketchTitle" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="sketchDescription" class="form-label">Description</label>
+                            <textarea class="form-control" id="sketchDescription" rows="3"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="sketchImageUrl" class="form-label">Image URL</label>
+                            <input type="url" class="form-control" id="sketchImageUrl">
+                        </div>
+                        <div class="mb-3">
+                            <label for="sketchDesigner" class="form-label">Designer</label>
+                            <select class="form-select" id="sketchDesigner" required></select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="sketchTags" class="form-label">Tags</label>
+                            <select class="form-select" id="sketchTags" multiple></select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="saveSketch">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Designer Modal -->
+    <div class="modal fade" id="designerModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add/Edit Designer</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="designerForm">
+                        <input type="hidden" id="designerId">
+                        <div class="mb-3">
+                            <label for="designerName" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="designerName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="designerEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="designerEmail" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="saveDesigner">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tag Modal -->
+    <div class="modal fade" id="tagModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add/Edit Tag</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">                    <form id="tagForm">
+                        <input type="hidden" id="tagId">
+                        <div class="mb-3">
+                            <label for="tagName" class="form-label">Tag Name</label>
+                            <input type="text" class="form-control" id="tagName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="sketchId" class="form-label">Sketch ID</label>
+                            <select class="form-select" id="sketchId" required>
+                                <option value="">Select Sketch</option>
+                                ${sketches.map(sketch => `
+                                    <option value="${sketch.id}">${sketch.title}</option>
+                                `).join('')}
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="saveTag">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- Custom JS -->
+    <script src="/js/api.js"></script>
+    <script src="/js/app.js"></script>
+</body>
+</html>
