@@ -1,0 +1,113 @@
+/* Custom CSS for Fashion Sketch Organizer */
+
+/* General Styles */
+body {
+    background-color: #f8f9fa;
+}
+
+.content-page {
+    min-height: 80vh;
+}
+
+/* Home Page Styles */
+.hero-section {
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    color: white;
+    padding: 4rem 0;
+    border-radius: 15px;
+    margin-bottom: 2rem;
+}
+
+.feature-card {
+    transition: transform 0.3s ease-in-out;
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+}
+
+.feature-icon {
+    font-size: 2.5rem;
+    color: #2575fc;
+}
+
+/* Dashboard Styles */
+.stat-card {
+    border: none;
+    border-radius: 10px;
+    transition: transform 0.2s;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+}
+
+.stat-card .card-title {
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.stat-card .card-text {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+/* Card Styles */
+.sketch-card {
+    transition: transform 0.2s;
+    height: 100%;
+}
+
+.sketch-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.sketch-card img {
+    height: 200px;
+    object-fit: cover;
+}
+
+.sketch-card .card-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.sketch-card .btn-group {
+    margin-top: auto;
+}
+
+/* Tag Styles */
+.badge {
+    margin-right: 0.25rem;
+    margin-bottom: 0.25rem;
+}
+
+/* Table Styles */
+.table th {
+    background-color: #f8f9fa;
+}
+
+/* Modal Styles */
+.modal-header {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #dee2e6;
+}
+
+/* Form Styles */
+.form-label {
+    font-weight: 500;
+}
+
+/* Alert Styles */
+.alert {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1050;
+    max-width: 300px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}

@@ -158,3 +158,10 @@ D:\Advance Programming\term Project\Fashion-Sketch-Organizer\bin\Debug\net9.0\NS
 D:\Advance Programming\term Project\Fashion-Sketch-Organizer\bin\Debug\net9.0\NSwag.Generation.AspNetCore.dll
 D:\Advance Programming\term Project\Fashion-Sketch-Organizer\bin\Debug\net9.0\YamlDotNet.dll
 D:\Advance Programming\term Project\Fashion-Sketch-Organizer\obj\Debug\net9.0\Fashion-Sketch-Organizer.MvcApplicationPartsAssemblyInfo.cs
+D:\Advance Programming\term Project\Fashion-Sketch-Organizer\bin\Debug\net9.0\Fashion-Sketch-Organizer.staticwebassets.runtime.json
+D:\Advance Programming\term Project\Fashion-Sketch-Organizer\obj\Debug\net9.0\Fashion-Sketch-Organizer.sourcelink.json
+D:\Advance Programming\term Project\Fashion-Sketch-Organizer\obj\Debug\net9.0\compressed\2jnlh5hwbo-4s8p1tt8pj.gz
+D:\Advance Programming\term Project\Fashion-Sketch-Organizer\obj\Debug\net9.0\compressed\ivttmpqg37-6qvp1jy663.gz
+D:\Advance Programming\term Project\Fashion-Sketch-Organizer\obj\Debug\net9.0\compressed\w8daycotep-es89rasi31.gz
+D:\Advance Programming\term Project\Fashion-Sketch-Organizer\obj\Debug\net9.0\compressed\8g0b8l6eu4-7bmbri5gjf.gz
+D:\Advance Programming\term Project\Fashion-Sketch-Organizer\obj\Debug\net9.0\compressed\ygvnxgf18f-7rgk64z039.gz
