@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Fashion-Sketch-Organizer")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d03d1c0397618ca38167fe48c03554b945a2f3b2")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b4816b1acd5ec1e6fad131919e59b6a27a8b9655")]
 [assembly: System.Reflection.AssemblyProductAttribute("Fashion-Sketch-Organizer")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Fashion-Sketch-Organizer")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
